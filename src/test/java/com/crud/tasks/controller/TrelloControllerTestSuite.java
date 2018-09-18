@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -75,6 +76,7 @@ public class TrelloControllerTestSuite {
     @Test
     public void shouldCreateTrelloCard() throws Exception {
         //Given
+        BadgeOfCard badgeOfCard = new BadgeOfCard(0, new AttachmentByTypeOfBadge());
         TrelloCardDto trelloCardDto = new TrelloCardDto(
                 "Test",
                 "Test description",
@@ -86,7 +88,7 @@ public class TrelloControllerTestSuite {
                 "323",
                 "Test",
                 "http://test.com",
-                new BadgeOfCard()
+                badgeOfCard
         );
 
         Mockito.when(trelloFacade.createCard(Mockito.any(TrelloCardDto.class))).thenReturn(createdTrelloCardDto);
@@ -100,6 +102,7 @@ public class TrelloControllerTestSuite {
                 .content(jsonContent))
                 .andExpect(jsonPath("$.id", Matchers.is("323")))
                 .andExpect(jsonPath("$.name", Matchers.is("Test")))
-                .andExpect(jsonPath("$.shortUrl", Matchers.is("http://test.com")));
+                .andExpect(jsonPath("$.shortUrl", Matchers.is("http://test.com")))
+                .andExpect(jsonPath("$.badges", Matchers.any(HashMap.class)));
     }
 }
