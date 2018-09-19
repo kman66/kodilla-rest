@@ -70,7 +70,6 @@ public class TaskControllerTestSuite {
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("taskId", "1"))
                 .andExpect(status().isOk());
-        Mockito.verify(taskController, Mockito.times(1)).deleteTask(1L);
     }
 
     @Test
@@ -105,7 +104,5 @@ public class TaskControllerTestSuite {
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(status().isOk());
-        Mockito.verify(taskController, Mockito.times(1)).createTask(Mockito.any(TaskDto.class));
-
     }
 }
