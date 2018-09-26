@@ -34,6 +34,7 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compile 'org.springframework.boot:spring-boot-starter-mail:2.0.4.RELEASE'
 	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('com.google.code.gson:gson:2.8.2')
 
 	// Swagger
