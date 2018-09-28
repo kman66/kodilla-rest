@@ -42,6 +42,4 @@ public class EmailSchedulerTest {
         Assert.assertTrue(mail.getMessage().contains("task"));
         Assert.assertFalse(mail.getMessage().contains("tasks"));
     }
-
-
 }
