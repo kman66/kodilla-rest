@@ -9,6 +9,8 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 
 import static org.junit.Assert.*;
 
@@ -21,21 +23,18 @@ public class SimpleEmailServiceTest {
     @Mock
     private JavaMailSender javaMailSender;
 
+    @Mock
+    private MailCreatorService mailCreatorService;
+
     @Test
     public void shouldSendEmail() {
         //Given
         Mail mail = new Mail("test@test.com", "Test", "Test message", "test1@test.com");
 
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(mail.getMailTo());
-        mailMessage.setSubject(mail.getSubject());
-        mailMessage.setText(mail.getMessage());
-        mailMessage.setCc(mail.getToCc());
-
         //When
         simpleEmailService.send(mail);
 
         //Then
-        Mockito.verify(javaMailSender, Mockito.times(1)).send(mailMessage);
+        Mockito.verify(javaMailSender, Mockito.times(1)).send(Mockito.any(MimeMessagePreparator.class));
     }
 }
