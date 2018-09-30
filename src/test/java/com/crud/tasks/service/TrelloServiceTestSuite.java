@@ -37,7 +37,7 @@ public class TrelloServiceTestSuite {
         TrelloCardDto trelloCardDto = new TrelloCardDto("test_name", "test_desc", "1", "2");
         Mail mail = new Mail("to", "test_subject", "test_message", "toCc");
         Mockito.when(trelloClient.createNewCard(trelloCardDto)).thenReturn(createdTrelloCardDto);
-        Mockito.doNothing().when(emailService).send(mail);
+        Mockito.doNothing().when(emailService).send(mail, MailCreatorService.NEW_TRELLO_CARD_MAIL);
         //When
         CreatedTrelloCardDto returnedCreatedTrelloCardDto = trelloService.createTrelloCard(trelloCardDto);
         //Then

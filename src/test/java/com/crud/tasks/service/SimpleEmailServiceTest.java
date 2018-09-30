@@ -7,9 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 
 import static org.junit.Assert.*;
@@ -32,7 +30,7 @@ public class SimpleEmailServiceTest {
         Mail mail = new Mail("test@test.com", "Test", "Test message", "test1@test.com");
 
         //When
-        simpleEmailService.send(mail);
+        simpleEmailService.send(mail, MailCreatorService.NEW_TRELLO_CARD_MAIL);
 
         //Then
         Mockito.verify(javaMailSender, Mockito.times(1)).send(Mockito.any(MimeMessagePreparator.class));
